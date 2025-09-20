@@ -3,1130 +3,692 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniTrack - Student Dashboard</title>
+    <title>EduTracker - Student Management App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        primary: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            800: '#166534',
-                            900: '#14532d'
-                        }
+                        'green-primary': '#10b981',
+                        'green-secondary': '#059669',
+                        'green-light': '#d1fae5',
+                        'green-dark': '#064e3b'
                     }
                 }
             }
         }
     </script>
     <style>
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .dark-mode {
+            background-color: #111827 !important;
+            color: #f9fafb !important;
         }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .dark-mode .bg-white {
+            background-color: #1f2937 !important;
         }
-        
-        .animate-fadeInUp {
-            animation: fadeInUp 0.6s ease-out;
+        .dark-mode .bg-gray-50 {
+            background-color: #111827 !important;
         }
-        
-        .animate-slideIn {
-            animation: slideIn 0.5s ease-out;
+        .dark-mode .bg-gray-100 {
+            background-color: #374151 !important;
         }
-        
-        .animate-delay-100 {
-            animation-delay: 0.1s;
+        .dark-mode .text-gray-900 {
+            color: #f9fafb !important;
         }
-        
-        .animate-delay-200 {
-            animation-delay: 0.2s;
+        .dark-mode .text-gray-700 {
+            color: #d1d5db !important;
         }
-        
-        .animate-delay-300 {
-            animation-delay: 0.3s;
+        .dark-mode .text-gray-600 {
+            color: #9ca3af !important;
+        }
+        .dark-mode .text-gray-500 {
+            color: #6b7280 !important;
+        }
+        .dark-mode .text-gray-400 {
+            color: #9ca3af !important;
+        }
+        .dark-mode .border-gray-200 {
+            border-color: #374151 !important;
+        }
+        .dark-mode .border-gray-300 {
+            border-color: #4b5563 !important;
+        }
+        .dark-mode .border-gray-600 {
+            border-color: #4b5563 !important;
+        }
+        .dark-mode .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4) !important;
+        }
+        .dark-mode input, .dark-mode select, .dark-mode textarea {
+            background-color: #374151 !important;
+            color: #f9fafb !important;
+            border-color: #4b5563 !important;
+        }
+        .dark-mode input:focus, .dark-mode select:focus, .dark-mode textarea:focus {
+            border-color: #10b981 !important;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+        }
+        .dark-mode .bg-green-light {
+            background-color: #064e3b !important;
+        }
+        .dark-mode .text-green-secondary {
+            color: #34d399 !important;
+        }
+        .dark-mode .bg-green-100 {
+            background-color: #064e3b !important;
+        }
+        .dark-mode .text-green-800 {
+            color: #a7f3d0 !important;
+        }
+        .dark-mode .bg-green-900 {
+            background-color: #064e3b !important;
+        }
+        .dark-mode .text-green-200 {
+            color: #a7f3d0 !important;
+        }
+        .dark-mode .hover\:bg-gray-200:hover {
+            background-color: #4b5563 !important;
         }
     </style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+<body class="min-h-screen bg-gray-50 transition-all duration-300">
     <!-- Header -->
-    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-sm">U</span>
+                    <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">UT</span>
                     </div>
-                    <h1 class="text-xl font-semibold text-gray-900 dark:text-white">UniTrack</h1>
+                    <h1 class="text-xl font-semibold text-gray-900">UniTrack</h1>
                 </div>
-                
-                <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200">
-                    <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path class="dark:hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                        <path class="hidden dark:block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
+                <button id="darkModeToggle" class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors text-sm font-medium">
+                    <span id="darkModeText">Dark</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-6 space-y-8">
         <!-- Schedule Section -->
-        <section class="mb-8">
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 animate-fadeInUp transition-colors duration-300">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 space-y-4 sm:space-y-0">
-                    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">My Schedule</h2>
-                    <button id="addSubjectBtn" class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2 w-full sm:w-auto">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        <span>Add Subject</span>
-                    </button>
-                </div>
-                
-                <div id="scheduleList" class="space-y-4">
-                    <!-- Empty state for subjects -->
-                    <div class="text-center py-8 text-gray-500 dark:text-gray-400">
-                        <svg class="w-12 h-12 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                        </svg>
-                        <p class="text-lg font-medium mb-2">No subjects added yet</p>
-                        <p class="text-sm mb-4">Start building your schedule by adding your first subject</p>
-                        <button onclick="document.getElementById('addSubjectBtn').click()" class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg transition-colors duration-200">
-                            Add Your First Subject
-                        </button>
-                    </div>
+        <section id="schedule" class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+                <h2 class="text-xl sm:text-2xl font-semibold text-gray-900">Class Schedule</h2>
+                <button id="addScheduleBtn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm transition-colors w-full sm:w-auto">
+                    Add Class
+                </button>
+            </div>
+            <div id="scheduleList" class="space-y-3">
+                <div class="text-center py-12 text-gray-500">
+                    <p class="text-base">No classes scheduled yet</p>
+                    <p class="text-sm text-gray-400">Click "Add Class" to get started</p>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Instructors Section -->
-        <section class="mb-8">
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 animate-fadeInUp animate-delay-200 transition-colors duration-300">
-                <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Instructors</h2>
-                
-                <div id="instructorGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                    <!-- Empty state for instructors -->
-                    <div class="col-span-full text-center py-8 text-gray-500 dark:text-gray-400">
-                        <svg class="w-12 h-12 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                        <p class="text-lg font-medium mb-2">No instructors added yet</p>
-                        <p class="text-sm mb-4">Add your instructors to easily contact them</p>
-                        <button onclick="document.getElementById('addInstructorBtn').click()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors duration-200">
-                            Add Your First Instructor
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="flex flex-col sm:flex-row gap-3">
-                    <button id="addInstructorBtn" class="flex-1 sm:flex-none bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        <span>Add Instructor</span>
-                    </button>
-                    <button id="contactBtn" class="flex-1 sm:flex-none bg-primary-500 hover:bg-primary-600 text-white py-2 px-6 rounded-lg transition-colors duration-200">
-                        Send Message
-                    </button>
-                    <button id="testNotificationBtn" class="flex-1 sm:flex-none bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition-colors duration-200 text-sm">
-                        Test Notification
-                    </button>
+        <!-- Instructors Section -->
+        <section id="instructors" class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+                <h2 class="text-xl sm:text-2xl font-semibold text-gray-900">Instructor Contacts</h2>
+                <button id="addInstructorBtn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm transition-colors w-full sm:w-auto">
+                    Add Instructor
+                </button>
+            </div>
+            <div id="instructorList" class="space-y-3">
+                <div class="text-center py-12 text-gray-500">
+                    <p class="text-base">No instructors added yet</p>
+                    <p class="text-sm text-gray-400">Click "Add Instructor" to get started</p>
                 </div>
             </div>
         </section>
 
-        <!-- Bottom Grid: Stats and Suggestions -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-            <!-- Quick Stats -->
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 animate-fadeInUp animate-delay-300 transition-colors duration-300">
-                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Today's Overview</h2>
-                
-                <div class="space-y-4">
-                    <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                        <span class="text-gray-600 dark:text-gray-300">Total Subjects</span>
-                        <span id="totalSubjects" class="font-semibold text-primary-600 dark:text-primary-400 text-lg">0</span>
-                    </div>
-                    <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                        <span class="text-gray-600 dark:text-gray-300">Next Class</span>
-                        <span class="font-semibold text-gray-900 dark:text-white">4:00 PM</span>
-                    </div>
-                    <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                        <span class="text-gray-600 dark:text-gray-300">Instructors</span>
-                        <span id="totalInstructors" class="font-semibold text-primary-600 dark:text-primary-400 text-lg">0</span>
-                    </div>
+        <!-- Assignments Section -->
+        <section id="assignments" class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+                <h2 class="text-xl sm:text-2xl font-semibold text-gray-900">Assignments & Reminders</h2>
+                <button id="addAssignmentBtn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm transition-colors w-full sm:w-auto">
+                    Add Assignment
+                </button>
+            </div>
+            <div id="assignmentList" class="space-y-3">
+                <div class="text-center py-12 text-gray-500">
+                    <p class="text-base">No assignments yet</p>
+                    <p class="text-sm text-gray-400">Click "Add Assignment" to get started</p>
                 </div>
             </div>
+        </section>
 
-            <!-- Student Suggestions -->
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 animate-fadeInUp animate-delay-300 transition-colors duration-300">
-                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Suggest Features</h2>
-                <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Help us improve UniTrack! What features would you like to see?</p>
-                
+        <!-- Suggestions Section -->
+        <section id="suggestions" class="space-y-6">
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+                <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-6">Send Suggestion</h2>
                 <form id="suggestionForm" class="space-y-4">
-                    <div>
-                        <textarea id="suggestionText" placeholder="Share your ideas for new features..." rows="3" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200 resize-none" required></textarea>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                            <select id="suggestionCategory" class="w-full p-3 border border-gray-300 rounded-lg bg-white text-gray-900">
+                                <option value="feature">Feature Request</option>
+                                <option value="bug">Bug Report</option>
+                                <option value="improvement">Improvement</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                            <input type="text" id="suggestionSubject" class="w-full p-3 border border-gray-300 rounded-lg bg-white text-gray-900" placeholder="Brief description of your suggestion">
+                        </div>
                     </div>
-                    
-                    <button type="submit" class="w-full bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-lg transition-colors duration-200">
-                        Submit Suggestion
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Details</label>
+                        <textarea id="suggestionDetails" rows="4" class="w-full p-3 border border-gray-300 rounded-lg bg-white text-gray-900" placeholder="Please provide detailed information about your suggestion..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg transition-colors">
+                        Send Suggestion
                     </button>
                 </form>
-                
-                <div id="suggestionsList" class="mt-4 space-y-2">
-                    <div class="text-sm text-gray-500 dark:text-gray-400 italic">Recent suggestions will appear here...</div>
+            </div>
+
+            <!-- Sent Suggestions -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Your Suggestions</h3>
+                <div id="sentSuggestions" class="space-y-3">
+                    <div class="text-center py-8 text-gray-500">
+                        <p>No suggestions sent yet</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
-    <!-- Add Subject Modal -->
-    <div id="addSubjectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md animate-fadeInUp transition-colors duration-300">
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Add New Subject</h3>
-            
-            <form id="addSubjectForm" class="space-y-4">
+    <!-- Modals -->
+    <!-- Schedule Modal -->
+    <div id="scheduleModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Add Class Schedule</h3>
+            <form id="scheduleForm" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject Name</label>
-                    <input type="text" id="subjectName" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200" required>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                    <input type="text" id="scheduleSubject" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
                 </div>
-                
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Schedule</label>
-                    <div id="scheduleInputs" class="space-y-2">
-                        <input type="text" class="schedule-input w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200" placeholder="e.g., Thursday 4:00PM - 5:00PM" required>
-                    </div>
-                    <button type="button" id="addScheduleBtn" class="mt-2 text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 flex items-center space-x-1">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        <span>Add Another Schedule</span>
-                    </button>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Instructor</label>
-                    <input type="text" id="subjectInstructor" placeholder="e.g., Prof. Johnson" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200" required>
-                </div>
-                
-                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 pt-4">
-                    <button type="button" id="cancelBtn" class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                        Cancel
-                    </button>
-                    <button type="submit" class="flex-1 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors duration-200">
-                        Add Subject
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Contact Modal -->
-    <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md animate-fadeInUp transition-colors duration-300">
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Send Message</h3>
-            
-            <form id="contactForm" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">To</label>
-                    <select id="instructorSelect" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200">
-                        <option>Prof. Johnson</option>
-                        <option>Prof. Smith</option>
-                        <option>Dr. Rodriguez</option>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Day</label>
+                    <select id="scheduleDay" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
                     </select>
                 </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
-                    <input type="text" id="messageSubject" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200" required>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
-                    <textarea id="messageContent" rows="4" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200" required></textarea>
-                </div>
-                
-                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 pt-4">
-                    <button type="button" id="cancelContactBtn" class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                        Cancel
-                    </button>
-                    <button type="submit" class="flex-1 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors duration-200">
-                        Send Message
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Edit Subject Modal -->
-    <div id="editSubjectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md animate-fadeInUp transition-colors duration-300">
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Edit Subject</h3>
-            
-            <form id="editSubjectForm" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject Name</label>
-                    <input type="text" id="editSubjectName" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200" required>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Schedule</label>
-                    <div id="editScheduleInputs" class="space-y-2">
-                        <input type="text" class="schedule-input w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200" placeholder="e.g., Thursday 4:00PM - 5:00PM" required>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Start Time</label>
+                        <input type="time" id="scheduleStartTime" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
                     </div>
-                    <button type="button" id="addEditScheduleBtn" class="mt-2 text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 flex items-center space-x-1">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        <span>Add Another Schedule</span>
-                    </button>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">End Time</label>
+                        <input type="time" id="scheduleEndTime" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
+                    </div>
                 </div>
-                
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Instructor</label>
-                    <input type="text" id="editSubjectInstructor" placeholder="e.g., Prof. Johnson" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200" required>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Room</label>
+                    <input type="text" id="scheduleRoom" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
                 </div>
-                
-                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 pt-4">
-                    <button type="button" id="cancelEditBtn" class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                        Cancel
-                    </button>
-                    <button type="submit" class="flex-1 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors duration-200">
-                        Save Changes
-                    </button>
+                <div class="flex space-x-3 pt-4">
+                    <button type="button" id="cancelSchedule" class="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 py-2 rounded-lg">Cancel</button>
+                    <button type="submit" class="flex-1 bg-green-primary text-white py-2 rounded-lg">Save</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Add Instructor Modal -->
-    <div id="addInstructorModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md animate-fadeInUp transition-colors duration-300">
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Add New Instructor</h3>
-            
-            <form id="addInstructorForm" class="space-y-4">
+    <!-- Instructor Modal -->
+    <div id="instructorModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Add Instructor</h3>
+            <form id="instructorForm" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Instructor Name</label>
-                    <input type="text" id="newInstructorName" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200" required>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name</label>
+                    <input type="text" id="instructorName" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
                 </div>
-                
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Department</label>
-                    <input type="text" id="newInstructorDepartment" placeholder="e.g., Computer Science" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200" required>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                    <input type="text" id="instructorSubject" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
                 </div>
-                
-                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 pt-4">
-                    <button type="button" id="cancelAddInstructorBtn" class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                        Cancel
-                    </button>
-                    <button type="submit" class="flex-1 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors duration-200">
-                        Add Instructor
-                    </button>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                    <input type="email" id="instructorEmail" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone</label>
+                    <input type="tel" id="instructorPhone" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Office Hours</label>
+                    <input type="text" id="instructorOfficeHours" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" placeholder="e.g., Mon-Fri 2:00-4:00 PM">
+                </div>
+                <div class="flex space-x-3 pt-4">
+                    <button type="button" id="cancelInstructor" class="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 py-2 rounded-lg">Cancel</button>
+                    <button type="submit" class="flex-1 bg-green-primary text-white py-2 rounded-lg">Save</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Edit Instructor Modal -->
-    <div id="editInstructorModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md animate-fadeInUp transition-colors duration-300">
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Edit Instructor</h3>
-            
-            <form id="editInstructorForm" class="space-y-4">
+    <!-- Assignment Modal -->
+    <div id="assignmentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Add Assignment</h3>
+            <form id="assignmentForm" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Instructor Name</label>
-                    <input type="text" id="editInstructorName" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200" required>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Title</label>
+                    <input type="text" id="assignmentTitle" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
                 </div>
-                
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Department</label>
-                    <input type="text" id="editInstructorDepartment" placeholder="e.g., Computer Science" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200" required>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                    <input type="text" id="assignmentSubject" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
                 </div>
-                
-                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 pt-4">
-                    <button type="button" id="cancelEditInstructorBtn" class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                        Cancel
-                    </button>
-                    <button type="submit" class="flex-1 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors duration-200">
-                        Save Changes
-                    </button>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Type</label>
+                    <select id="assignmentType" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
+                        <option value="Assignment">Assignment</option>
+                        <option value="Project">Project</option>
+                        <option value="Exam">Exam</option>
+                        <option value="Quiz">Quiz</option>
+                        <option value="Reminder">Reminder</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Due Date</label>
+                    <input type="date" id="assignmentDate" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Due Time</label>
+                    <input type="time" id="assignmentTime" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Description</label>
+                    <textarea id="assignmentDescription" rows="3" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"></textarea>
+                </div>
+                <div class="flex space-x-3 pt-4">
+                    <button type="button" id="cancelAssignment" class="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 py-2 rounded-lg">Cancel</button>
+                    <button type="submit" class="flex-1 bg-green-primary text-white py-2 rounded-lg">Save</button>
                 </div>
             </form>
         </div>
     </div>
-
-    <!-- Notification Container -->
-    <div id="notificationContainer" class="fixed top-4 right-4 z-50 space-y-2"></div>
 
     <script>
-        // Notification System
-        class NotificationSystem {
-            constructor() {
-                this.container = document.getElementById('notificationContainer');
-                this.checkInterval = null;
-                this.notifiedSubjects = new Set();
-                this.requestNotificationPermission();
-                this.startChecking();
-            }
+        // Data storage
+        let schedules = JSON.parse(localStorage.getItem('edutracker_schedules')) || [];
+        let instructors = JSON.parse(localStorage.getItem('edutracker_instructors')) || [];
+        let assignments = JSON.parse(localStorage.getItem('edutracker_assignments')) || [];
+        let suggestions = JSON.parse(localStorage.getItem('edutracker_suggestions')) || [];
 
-            async requestNotificationPermission() {
-                if ('Notification' in window && Notification.permission === 'default') {
-                    await Notification.requestPermission();
-                }
-            }
+        // Dark mode
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeText = document.getElementById('darkModeText');
+        const isDarkMode = localStorage.getItem('edutracker_darkmode') === 'true';
+        
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+            darkModeText.textContent = 'Light';
+        }
 
-            showNotification(subject, timeUntil) {
-                // Create visual notification
-                const notification = document.createElement('div');
-                notification.className = 'bg-primary-500 text-white p-4 rounded-lg shadow-lg max-w-sm animate-slideIn border-l-4 border-primary-300';
-                notification.innerHTML = `
-                    <div class="flex items-start justify-between">
-                        <div class="flex items-start space-x-3">
-                            <div class="bg-white bg-opacity-20 rounded-full p-1 mt-0.5">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-sm">Class Reminder</h4>
-                                <p class="text-sm opacity-90">${subject.name}</p>
-                                <p class="text-xs opacity-75">Starting in ${timeUntil} minutes</p>
-                            </div>
-                        </div>
-                        <button class="text-white hover:text-gray-200 ml-2" onclick="this.parentElement.parentElement.remove()">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
-                        </button>
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            darkModeText.textContent = isDark ? 'Light' : 'Dark';
+            localStorage.setItem('edutracker_darkmode', isDark);
+        });
+
+        // Smooth scrolling for better UX
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Modal functions
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.getElementById(modalId).classList.add('flex');
+        }
+
+        function hideModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.getElementById(modalId).classList.remove('flex');
+        }
+
+        // Schedule functions
+        document.getElementById('addScheduleBtn').addEventListener('click', () => showModal('scheduleModal'));
+        document.getElementById('cancelSchedule').addEventListener('click', () => hideModal('scheduleModal'));
+
+        document.getElementById('scheduleForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const schedule = {
+                id: Date.now(),
+                subject: document.getElementById('scheduleSubject').value,
+                day: document.getElementById('scheduleDay').value,
+                startTime: document.getElementById('scheduleStartTime').value,
+                endTime: document.getElementById('scheduleEndTime').value,
+                room: document.getElementById('scheduleRoom').value
+            };
+            
+            schedules.push(schedule);
+            localStorage.setItem('edutracker_schedules', JSON.stringify(schedules));
+            renderSchedules();
+            hideModal('scheduleModal');
+            document.getElementById('scheduleForm').reset();
+        });
+
+        function renderSchedules() {
+            const container = document.getElementById('scheduleList');
+            
+            if (schedules.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+                        <div class="text-6xl mb-4">📅</div>
+                        <p class="text-lg">No classes scheduled yet</p>
+                        <p class="text-sm">Click "Add Class" to get started</p>
                     </div>
                 `;
-
-                this.container.appendChild(notification);
-
-                // Auto remove after 10 seconds
-                setTimeout(() => {
-                    if (notification.parentElement) {
-                        notification.style.animation = 'fadeOut 0.3s ease-out';
-                        setTimeout(() => notification.remove(), 300);
-                    }
-                }, 10000);
-
-                // Browser notification
-                if ('Notification' in window && Notification.permission === 'granted') {
-                    new Notification(`Class Reminder: ${subject.name}`, {
-                        body: `Your class starts in ${timeUntil} minutes`,
-                        icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bS0yIDE1bC01LTUgMS40MS0xLjQxTDEwIDE0LjE3bDcuNTktNy59TDE5IDhsLTkgOXoiIGZpbGw9IiMyMmM1NWUiLz4KPHN2Zz4K',
-                        tag: `class-${subject.name}`,
-                        requireInteraction: false
-                    });
-                }
+                return;
             }
 
-            parseTime(timeStr) {
-                // Parse time strings like "4:00PM", "7:30AM", "9:30AM"
-                const match = timeStr.match(/(\d{1,2}):(\d{2})(AM|PM)/i);
-                if (!match) return null;
+            const sortedSchedules = schedules.sort((a, b) => {
+                const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                const dayDiff = dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day);
+                if (dayDiff !== 0) return dayDiff;
+                return a.startTime.localeCompare(b.startTime);
+            });
 
-                let hours = parseInt(match[1]);
-                const minutes = parseInt(match[2]);
-                const period = match[3].toUpperCase();
-
-                if (period === 'PM' && hours !== 12) hours += 12;
-                if (period === 'AM' && hours === 12) hours = 0;
-
-                return { hours, minutes };
-            }
-
-            getCurrentDayName() {
-                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-                return days[new Date().getDay()];
-            }
-
-            checkUpcomingClasses() {
-                const now = new Date();
-                const currentDay = this.getCurrentDayName();
-                const currentTime = now.getHours() * 60 + now.getMinutes();
-
-                const subjects = document.querySelectorAll('.subject-item');
-                
-                subjects.forEach(subjectElement => {
-                    const nameElement = subjectElement.querySelector('h3');
-                    const instructorElement = subjectElement.querySelector('.text-primary-600, .text-primary-400');
-                    const schedulesData = subjectElement.getAttribute('data-schedules');
-
-                    if (!nameElement || !schedulesData) return;
-
-                    const subject = {
-                        name: nameElement.textContent.trim(),
-                        instructor: instructorElement ? instructorElement.textContent.trim() : ''
-                    };
-
-                    let schedules;
-                    try {
-                        schedules = JSON.parse(schedulesData);
-                    } catch (e) {
-                        return;
-                    }
-
-                    // Check each schedule for this subject
-                    schedules.forEach(schedule => {
-                        // Parse schedule (e.g., "Thursday 4:00PM - 5:00PM")
-                        const scheduleParts = schedule.split(' ');
-                        if (scheduleParts.length < 3) return;
-
-                        const dayName = scheduleParts[0].trim();
-                        const timeRange = scheduleParts.slice(1).join(' ');
-                        const timeParts = timeRange.split(' - ');
-                        if (timeParts.length !== 2) return;
-
-                        const startTimeStr = timeParts[0].trim();
-
-                        // Check if today is a class day
-                        const isToday = dayName.toLowerCase() === currentDay.toLowerCase();
-                        if (!isToday) return;
-
-                        const classTime = this.parseTime(startTimeStr);
-                        if (!classTime) return;
-
-                        const classTimeMinutes = classTime.hours * 60 + classTime.minutes;
-                        const timeDifference = classTimeMinutes - currentTime;
-
-                        // Notify 15 minutes before class
-                        const notificationKey = `${subject.name}-${currentDay}-${startTimeStr}`;
-                        
-                        if (timeDifference > 0 && timeDifference <= 15 && !this.notifiedSubjects.has(notificationKey)) {
-                            const subjectWithSchedule = {
-                                ...subject,
-                                schedule: schedule
-                            };
-                            this.showNotification(subjectWithSchedule, timeDifference);
-                            this.notifiedSubjects.add(notificationKey);
-                            
-                            // Remove from notified set after class time passes
-                            setTimeout(() => {
-                                this.notifiedSubjects.delete(notificationKey);
-                            }, (timeDifference + 60) * 60 * 1000); // Remove 1 hour after class starts
-                        }
-                    });
-                });
-            }
-
-            startChecking() {
-                // Check every minute
-                this.checkInterval = setInterval(() => {
-                    this.checkUpcomingClasses();
-                }, 60000);
-
-                // Initial check
-                this.checkUpcomingClasses();
-            }
-
-            stopChecking() {
-                if (this.checkInterval) {
-                    clearInterval(this.checkInterval);
-                    this.checkInterval = null;
-                }
-            }
+            container.innerHTML = sortedSchedules.map(schedule => `
+                <div class="bg-green-light dark:bg-gray-700 rounded-lg p-4 border-l-4 border-green-primary">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 dark:text-white text-lg">${schedule.subject}</h3>
+                            <p class="text-green-secondary dark:text-green-400 font-medium">${schedule.day}</p>
+                            <p class="text-gray-600 dark:text-gray-300">${schedule.startTime} - ${schedule.endTime}</p>
+                            ${schedule.room ? `<p class="text-gray-500 dark:text-gray-400">Room: ${schedule.room}</p>` : ''}
+                        </div>
+                        <button onclick="deleteSchedule(${schedule.id})" class="text-red-500 hover:text-red-700 px-2 py-1 text-sm self-start">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        // Initialize notification system
-        const notificationSystem = new NotificationSystem();
-
-        // Dark mode toggle
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const html = document.documentElement;
-        
-        // Check for saved theme preference or default to light mode
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            html.classList.add('dark');
+        function deleteSchedule(id) {
+            schedules = schedules.filter(s => s.id !== id);
+            localStorage.setItem('edutracker_schedules', JSON.stringify(schedules));
+            renderSchedules();
         }
-        
-        darkModeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            const theme = html.classList.contains('dark') ? 'dark' : 'light';
-            localStorage.setItem('theme', theme);
-        });
 
-        // Modal functionality
-        const addSubjectBtn = document.getElementById('addSubjectBtn');
-        const addSubjectModal = document.getElementById('addSubjectModal');
-        const cancelBtn = document.getElementById('cancelBtn');
-        const addSubjectForm = document.getElementById('addSubjectForm');
-        const scheduleList = document.getElementById('scheduleList');
-        const totalSubjects = document.getElementById('totalSubjects');
+        // Instructor functions
+        document.getElementById('addInstructorBtn').addEventListener('click', () => showModal('instructorModal'));
+        document.getElementById('cancelInstructor').addEventListener('click', () => hideModal('instructorModal'));
 
-        const contactBtn = document.getElementById('contactBtn');
-        const contactModal = document.getElementById('contactModal');
-        const cancelContactBtn = document.getElementById('cancelContactBtn');
-        const contactForm = document.getElementById('contactForm');
-        const testNotificationBtn = document.getElementById('testNotificationBtn');
-
-        const editSubjectModal = document.getElementById('editSubjectModal');
-        const cancelEditBtn = document.getElementById('cancelEditBtn');
-        const editSubjectForm = document.getElementById('editSubjectForm');
-        let currentEditingSubject = null;
-
-        const addInstructorBtn = document.getElementById('addInstructorBtn');
-        const addInstructorModal = document.getElementById('addInstructorModal');
-        const cancelAddInstructorBtn = document.getElementById('cancelAddInstructorBtn');
-        const addInstructorForm = document.getElementById('addInstructorForm');
-
-        const editInstructorModal = document.getElementById('editInstructorModal');
-        const cancelEditInstructorBtn = document.getElementById('cancelEditInstructorBtn');
-        const editInstructorForm = document.getElementById('editInstructorForm');
-        let currentEditingInstructor = null;
-
-        const suggestionForm = document.getElementById('suggestionForm');
-        const suggestionsList = document.getElementById('suggestionsList');
-
-        // Show add subject modal
-        addSubjectBtn.addEventListener('click', () => {
-            addSubjectModal.classList.remove('hidden');
-            addSubjectModal.classList.add('flex');
-        });
-
-        // Hide add subject modal
-        cancelBtn.addEventListener('click', () => {
-            addSubjectModal.classList.add('hidden');
-            addSubjectModal.classList.remove('flex');
-        });
-
-        // Show add instructor modal
-        addInstructorBtn.addEventListener('click', () => {
-            addInstructorModal.classList.remove('hidden');
-            addInstructorModal.classList.add('flex');
-        });
-
-        // Show contact modal
-        contactBtn.addEventListener('click', () => {
-            // Update instructor dropdown with current instructors
-            updateInstructorDropdown();
-            contactModal.classList.remove('hidden');
-            contactModal.classList.add('flex');
-        });
-
-        // Hide contact modal
-        cancelContactBtn.addEventListener('click', () => {
-            contactModal.classList.add('hidden');
-            contactModal.classList.remove('flex');
-        });
-
-        // Hide edit modal
-        cancelEditBtn.addEventListener('click', () => {
-            editSubjectModal.classList.add('hidden');
-            editSubjectModal.classList.remove('flex');
-            currentEditingSubject = null;
-        });
-
-        // Hide add instructor modal
-        cancelAddInstructorBtn.addEventListener('click', () => {
-            addInstructorModal.classList.add('hidden');
-            addInstructorModal.classList.remove('flex');
-        });
-
-        // Hide edit instructor modal
-        cancelEditInstructorBtn.addEventListener('click', () => {
-            editInstructorModal.classList.add('hidden');
-            editInstructorModal.classList.remove('flex');
-            currentEditingInstructor = null;
-        });
-
-        // Test notification
-        testNotificationBtn.addEventListener('click', () => {
-            const testSubject = {
-                name: 'Computer Science 101',
-                schedule: 'Thursday 4:00PM - 5:00PM',
-                instructor: 'Prof. Johnson'
+        document.getElementById('instructorForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const instructor = {
+                id: Date.now(),
+                name: document.getElementById('instructorName').value,
+                subject: document.getElementById('instructorSubject').value,
+                email: document.getElementById('instructorEmail').value,
+                phone: document.getElementById('instructorPhone').value,
+                officeHours: document.getElementById('instructorOfficeHours').value
             };
-            notificationSystem.showNotification(testSubject, 5);
+            
+            instructors.push(instructor);
+            localStorage.setItem('edutracker_instructors', JSON.stringify(instructors));
+            renderInstructors();
+            hideModal('instructorModal');
+            document.getElementById('instructorForm').reset();
         });
 
-        // Close modals when clicking outside
-        [addSubjectModal, contactModal, editSubjectModal, addInstructorModal, editInstructorModal].forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('flex');
-                    if (modal === editSubjectModal) {
-                        currentEditingSubject = null;
-                    }
-                    if (modal === editInstructorModal) {
-                        currentEditingInstructor = null;
-                    }
-                }
-            });
-        });
-
-        // Schedule management functions
-        function addScheduleInput(container, value = '') {
-            const inputDiv = document.createElement('div');
-            inputDiv.className = 'flex items-center space-x-2';
-            inputDiv.innerHTML = `
-                <input type="text" class="schedule-input flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200" placeholder="e.g., Thursday 4:00PM - 5:00PM" value="${value}" required>
-                <button type="button" class="remove-schedule-btn text-red-500 hover:text-red-700 p-1">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                    </svg>
-                </button>
-            `;
+        function renderInstructors() {
+            const container = document.getElementById('instructorList');
             
-            // Add remove functionality
-            inputDiv.querySelector('.remove-schedule-btn').addEventListener('click', () => {
-                if (container.children.length > 1) {
-                    inputDiv.remove();
-                }
-            });
-            
-            container.appendChild(inputDiv);
-        }
-
-        function getSchedulesFromContainer(container) {
-            const inputs = container.querySelectorAll('.schedule-input');
-            return Array.from(inputs).map(input => input.value.trim()).filter(value => value);
-        }
-
-        function clearScheduleContainer(container) {
-            container.innerHTML = '';
-            addScheduleInput(container);
-        }
-
-        function populateScheduleContainer(container, schedules) {
-            container.innerHTML = '';
-            schedules.forEach(schedule => addScheduleInput(container, schedule));
-        }
-
-        // Add schedule button functionality
-        document.getElementById('addScheduleBtn').addEventListener('click', () => {
-            addScheduleInput(document.getElementById('scheduleInputs'));
-        });
-
-        document.getElementById('addEditScheduleBtn').addEventListener('click', () => {
-            addScheduleInput(document.getElementById('editScheduleInputs'));
-        });
-
-        // Add subject form submission
-        addSubjectForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('subjectName').value;
-            const schedules = getSchedulesFromContainer(document.getElementById('scheduleInputs'));
-            const instructor = document.getElementById('subjectInstructor').value;
-            
-            if (schedules.length === 0) {
-                alert('Please add at least one schedule.');
+            if (instructors.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+                        <div class="text-6xl mb-4">👨‍🏫</div>
+                        <p class="text-lg">No instructors added yet</p>
+                        <p class="text-sm">Click "Add Instructor" to get started</p>
+                    </div>
+                `;
                 return;
             }
-            
-            // Create schedule display HTML
-            const scheduleDisplayHTML = schedules.map(schedule => 
-                `<p class="text-sm text-gray-600 dark:text-gray-300">${schedule}</p>`
-            ).join('');
-            
-            // Create new subject element
-            const subjectDiv = document.createElement('div');
-            subjectDiv.className = 'subject-item bg-gray-50 dark:bg-gray-700 rounded-lg p-4 border-l-4 border-primary-500 animate-slideIn transition-colors duration-300';
-            subjectDiv.setAttribute('data-schedules', JSON.stringify(schedules));
-            subjectDiv.innerHTML = `
-                <div class="flex justify-between items-start">
-                    <div class="flex-1 min-w-0">
-                        <h3 class="font-semibold text-gray-900 dark:text-white truncate">${name}</h3>
-                        <div class="schedule-display mt-1 space-y-1">
-                            ${scheduleDisplayHTML}
+
+            container.innerHTML = instructors.map(instructor => `
+                <div class="bg-white dark:bg-gray-700 rounded-lg p-4 sm:p-6 border border-gray-200 dark:border-gray-600 shadow-sm">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-2">
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 dark:text-white text-lg sm:text-xl">${instructor.name}</h3>
+                            <p class="text-green-secondary dark:text-green-400 font-medium">${instructor.subject}</p>
                         </div>
-                        <p class="text-sm text-primary-600 dark:text-primary-400 mt-1">${instructor}</p>
+                        <button onclick="deleteInstructor(${instructor.id})" class="text-red-500 hover:text-red-700 px-2 py-1 text-sm self-start">
+                            Delete
+                        </button>
                     </div>
-                    <div class="flex space-x-1 ml-2 flex-shrink-0">
-                        <button class="edit-btn text-blue-500 hover:text-blue-700 p-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                            </svg>
-                        </button>
-                        <button class="delete-btn text-red-500 hover:text-red-700 p-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                        </button>
+                    <div class="space-y-2">
+                        ${instructor.email ? `
+                            <div class="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
+                                <span class="text-gray-500 text-sm font-medium">Email:</span>
+                                <a href="mailto:${instructor.email}" class="text-blue-600 hover:underline break-all">${instructor.email}</a>
+                            </div>
+                        ` : ''}
+                        ${instructor.phone ? `
+                            <div class="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
+                                <span class="text-gray-500 text-sm font-medium">Phone:</span>
+                                <a href="tel:${instructor.phone}" class="text-blue-600 hover:underline">${instructor.phone}</a>
+                            </div>
+                        ` : ''}
+                        ${instructor.officeHours ? `
+                            <div class="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
+                                <span class="text-gray-500 text-sm font-medium">Office Hours:</span>
+                                <span class="text-gray-600 dark:text-gray-300">${instructor.officeHours}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2 mt-4">
+                        ${instructor.email ? `
+                            <button onclick="window.open('mailto:${instructor.email}', '_blank')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+                                Send Email
+                            </button>
+                        ` : ''}
+                        ${instructor.phone ? `
+                            <button onclick="window.open('tel:${instructor.phone}', '_blank')" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+                                Call
+                            </button>
+                        ` : ''}
                     </div>
                 </div>
-            `;
-            
-            // Remove empty state if it exists
-            const emptyState = scheduleList.querySelector('.text-center.py-8');
-            if (emptyState) {
-                emptyState.remove();
-            }
-            
-            scheduleList.appendChild(subjectDiv);
-            updateSubjectCount();
-            
-            // Reset form and close modal
-            addSubjectForm.reset();
-            clearScheduleContainer(document.getElementById('scheduleInputs'));
-            addSubjectModal.classList.add('hidden');
-            addSubjectModal.classList.remove('flex');
-        });
+            `).join('');
+        }
 
-        // Contact form submission
-        contactForm.addEventListener('submit', (e) => {
+        function deleteInstructor(id) {
+            instructors = instructors.filter(i => i.id !== id);
+            localStorage.setItem('edutracker_instructors', JSON.stringify(instructors));
+            renderInstructors();
+        }
+
+        // Assignment functions
+        document.getElementById('addAssignmentBtn').addEventListener('click', () => showModal('assignmentModal'));
+        document.getElementById('cancelAssignment').addEventListener('click', () => hideModal('assignmentModal'));
+
+        document.getElementById('assignmentForm').addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Show success message (in a real app, this would send the message)
-            alert('Message sent successfully!');
+            const assignment = {
+                id: Date.now(),
+                title: document.getElementById('assignmentTitle').value,
+                subject: document.getElementById('assignmentSubject').value,
+                type: document.getElementById('assignmentType').value,
+                date: document.getElementById('assignmentDate').value,
+                time: document.getElementById('assignmentTime').value,
+                description: document.getElementById('assignmentDescription').value,
+                completed: false
+            };
             
-            // Reset form and close modal
-            contactForm.reset();
-            contactModal.classList.add('hidden');
-            contactModal.classList.remove('flex');
+            assignments.push(assignment);
+            localStorage.setItem('edutracker_assignments', JSON.stringify(assignments));
+            renderAssignments();
+            hideModal('assignmentModal');
+            document.getElementById('assignmentForm').reset();
         });
 
-        // Edit subject form submission
-        editSubjectForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+        function renderAssignments() {
+            const container = document.getElementById('assignmentList');
             
-            if (!currentEditingSubject) return;
-            
-            const name = document.getElementById('editSubjectName').value;
-            const schedules = getSchedulesFromContainer(document.getElementById('editScheduleInputs'));
-            const instructor = document.getElementById('editSubjectInstructor').value;
-            
-            if (schedules.length === 0) {
-                alert('Please add at least one schedule.');
+            if (assignments.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+                        <div class="text-6xl mb-4">📝</div>
+                        <p class="text-lg">No assignments yet</p>
+                        <p class="text-sm">Click "Add Assignment" to get started</p>
+                    </div>
+                `;
                 return;
             }
-            
-            // Create schedule display HTML
-            const scheduleDisplayHTML = schedules.map(schedule => 
-                `<p class="text-sm text-gray-600 dark:text-gray-300">${schedule}</p>`
-            ).join('');
-            
-            // Update the subject element
-            const nameElement = currentEditingSubject.querySelector('h3');
-            const scheduleDisplayElement = currentEditingSubject.querySelector('.schedule-display');
-            const instructorElement = currentEditingSubject.querySelector('.text-primary-600, .text-primary-400');
-            
-            nameElement.textContent = name;
-            scheduleDisplayElement.innerHTML = scheduleDisplayHTML;
-            instructorElement.textContent = instructor;
-            
-            // Update data-schedules attribute
-            currentEditingSubject.setAttribute('data-schedules', JSON.stringify(schedules));
-            
-            // Reset form and close modal
-            editSubjectForm.reset();
-            clearScheduleContainer(document.getElementById('editScheduleInputs'));
-            editSubjectModal.classList.add('hidden');
-            editSubjectModal.classList.remove('flex');
-            currentEditingSubject = null;
-            
-            // Show success message
-            alert('Subject updated successfully!');
-        });
 
-        // Add instructor form submission
-        addInstructorForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('newInstructorName').value;
-            const department = document.getElementById('newInstructorDepartment').value;
-            
-            // Generate initials
-            const initials = name.split(' ').map(word => word.charAt(0)).join('').toUpperCase().substring(0, 2);
-            
-            // Create new instructor card
-            const instructorDiv = document.createElement('div');
-            instructorDiv.className = 'instructor-card bg-gray-50 dark:bg-gray-700 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200';
-            instructorDiv.innerHTML = `
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-3 flex-1 min-w-0">
-                        <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center flex-shrink-0">
-                            <span class="text-white font-semibold text-sm">${initials}</span>
-                        </div>
-                        <div class="min-w-0 flex-1">
-                            <h3 class="font-medium text-gray-900 dark:text-white truncate">${name}</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-300 truncate">${department}</p>
+            const sortedAssignments = assignments.sort((a, b) => {
+                if (a.completed !== b.completed) return a.completed - b.completed;
+                return new Date(a.date + ' ' + (a.time || '00:00')) - new Date(b.date + ' ' + (b.time || '00:00'));
+            });
+
+            container.innerHTML = sortedAssignments.map(assignment => {
+                const dueDate = new Date(assignment.date + ' ' + (assignment.time || '00:00'));
+                const now = new Date();
+                const isOverdue = dueDate < now && !assignment.completed;
+                const isDueSoon = dueDate - now < 24 * 60 * 60 * 1000 && dueDate > now && !assignment.completed;
+
+                return `
+                    <div class="bg-white dark:bg-gray-700 rounded-lg p-4 border-l-4 ${
+                        assignment.completed ? 'border-gray-400 opacity-75' :
+                        isOverdue ? 'border-red-500' :
+                        isDueSoon ? 'border-yellow-500' :
+                        'border-green-primary'
+                    }">
+                        <div class="flex flex-col sm:flex-row sm:justify-between gap-3">
+                            <div class="flex items-start space-x-3 flex-1">
+                                <input type="checkbox" ${assignment.completed ? 'checked' : ''} 
+                                       onchange="toggleAssignment(${assignment.id})"
+                                       class="mt-1 w-5 h-5 text-green-primary rounded flex-shrink-0">
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="font-semibold text-gray-900 dark:text-white ${assignment.completed ? 'line-through' : ''} break-words">${assignment.title}</h3>
+                                    <div class="flex flex-wrap items-center gap-2 text-sm text-gray-600 dark:text-gray-300 mt-1">
+                                        <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded whitespace-nowrap">${assignment.type}</span>
+                                        <span class="break-words">${assignment.subject}</span>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-300 mt-2">
+                                        Due: ${new Date(assignment.date).toLocaleDateString()}
+                                        ${assignment.time ? ` at ${assignment.time}` : ''}
+                                    </p>
+                                    ${assignment.description ? `<p class="text-gray-500 dark:text-gray-400 text-sm mt-2 break-words">${assignment.description}</p>` : ''}
+                                    ${isOverdue ? '<p class="text-red-500 text-sm font-medium mt-1">Overdue</p>' : ''}
+                                    ${isDueSoon ? '<p class="text-yellow-600 text-sm font-medium mt-1">Due soon</p>' : ''}
+                                </div>
+                            </div>
+                            <button onclick="deleteAssignment(${assignment.id})" class="text-red-500 hover:text-red-700 px-2 py-1 text-sm self-start flex-shrink-0">
+                                Delete
+                            </button>
                         </div>
                     </div>
-                    <div class="flex space-x-1 ml-2 flex-shrink-0">
-                        <button class="edit-instructor-btn text-blue-500 hover:text-blue-700 p-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                            </svg>
-                        </button>
-                        <button class="delete-instructor-btn text-red-500 hover:text-red-700 p-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            // Add to instructor grid
-            const instructorGrid = document.getElementById('instructorGrid');
-            
-            // Remove empty state if it exists
-            const emptyState = instructorGrid.querySelector('.col-span-full');
-            if (emptyState) {
-                emptyState.remove();
-            }
-            
-            instructorGrid.appendChild(instructorDiv);
-            updateInstructorCount();
-            
-            // Reset form and close modal
-            addInstructorForm.reset();
-            addInstructorModal.classList.add('hidden');
-            addInstructorModal.classList.remove('flex');
-            
-            // Show success message
-            alert('Instructor added successfully!');
-        });
+                `;
+            }).join('');
+        }
 
-        // Edit instructor form submission
-        editInstructorForm.addEventListener('submit', (e) => {
+        function toggleAssignment(id) {
+            const assignment = assignments.find(a => a.id === id);
+            if (assignment) {
+                assignment.completed = !assignment.completed;
+                localStorage.setItem('edutracker_assignments', JSON.stringify(assignments));
+                renderAssignments();
+            }
+        }
+
+        function deleteAssignment(id) {
+            assignments = assignments.filter(a => a.id !== id);
+            localStorage.setItem('edutracker_assignments', JSON.stringify(assignments));
+            renderAssignments();
+        }
+
+        // Suggestion functions
+        document.getElementById('suggestionForm').addEventListener('submit', (e) => {
             e.preventDefault();
             
-            if (!currentEditingInstructor) return;
+            const suggestion = {
+                id: Date.now(),
+                category: document.getElementById('suggestionCategory').value,
+                subject: document.getElementById('suggestionSubject').value,
+                details: document.getElementById('suggestionDetails').value,
+                date: new Date().toLocaleDateString(),
+                status: 'Sent'
+            };
             
-            const name = document.getElementById('editInstructorName').value;
-            const department = document.getElementById('editInstructorDepartment').value;
-            
-            // Update the instructor element
-            const nameElement = currentEditingInstructor.querySelector('h3');
-            const departmentElement = currentEditingInstructor.querySelector('p');
-            const initialsElement = currentEditingInstructor.querySelector('.bg-primary-500 span');
-            
-            nameElement.textContent = name;
-            departmentElement.textContent = department;
-            
-            // Update initials
-            const initials = name.split(' ').map(word => word.charAt(0)).join('').toUpperCase().substring(0, 2);
-            initialsElement.textContent = initials;
-            
-            // Reset form and close modal
-            editInstructorForm.reset();
-            editInstructorModal.classList.add('hidden');
-            editInstructorModal.classList.remove('flex');
-            currentEditingInstructor = null;
-            
-            // Show success message
-            alert('Instructor updated successfully!');
-        });
-
-        // Suggestion form submission
-        suggestionForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const suggestionText = document.getElementById('suggestionText').value;
-            
-            // Create suggestion element
-            const suggestionDiv = document.createElement('div');
-            suggestionDiv.className = 'bg-gray-50 dark:bg-gray-700 rounded-lg p-3 animate-slideIn transition-colors duration-300';
-            suggestionDiv.innerHTML = `
-                <p class="text-sm text-gray-700 dark:text-gray-300">"${suggestionText}"</p>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Just now</p>
-            `;
-            
-            // Remove placeholder text if it exists
-            const placeholder = suggestionsList.querySelector('.italic');
-            if (placeholder) {
-                placeholder.remove();
-            }
-            
-            suggestionsList.insertBefore(suggestionDiv, suggestionsList.firstChild);
-            
-            // Reset form
-            suggestionForm.reset();
+            suggestions.push(suggestion);
+            localStorage.setItem('edutracker_suggestions', JSON.stringify(suggestions));
+            renderSuggestions();
+            document.getElementById('suggestionForm').reset();
             
             // Show success message
             alert('Thank you for your suggestion! We appreciate your feedback.');
         });
 
-        // Edit and delete subject functionality
-        scheduleList.addEventListener('click', (e) => {
-            const subjectItem = e.target.closest('.subject-item');
+        function renderSuggestions() {
+            const container = document.getElementById('sentSuggestions');
             
-            if (e.target.closest('.edit-btn')) {
-                // Edit functionality
-                currentEditingSubject = subjectItem;
-                
-                const nameElement = subjectItem.querySelector('h3');
-                const instructorElement = subjectItem.querySelector('.text-primary-600, .text-primary-400');
-                const schedulesData = subjectItem.getAttribute('data-schedules');
-                
-                // Populate edit form with current values
-                document.getElementById('editSubjectName').value = nameElement.textContent.trim();
-                document.getElementById('editSubjectInstructor').value = instructorElement.textContent.trim();
-                
-                // Populate schedules
-                let schedules = [];
-                try {
-                    schedules = JSON.parse(schedulesData || '[]');
-                } catch (e) {
-                    schedules = [];
-                }
-                
-                if (schedules.length === 0) {
-                    schedules = [''];
-                }
-                
-                populateScheduleContainer(document.getElementById('editScheduleInputs'), schedules);
-                
-                // Show edit modal
-                editSubjectModal.classList.remove('hidden');
-                editSubjectModal.classList.add('flex');
+            if (suggestions.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-gray-500 dark:text-gray-400">
+                        <p>No suggestions sent yet</p>
+                    </div>
+                `;
+                return;
             }
-            
-            if (e.target.closest('.delete-btn')) {
-                // Delete functionality
-                subjectItem.style.animation = 'fadeOut 0.3s ease-out';
-                setTimeout(() => {
-                    subjectItem.remove();
-                    updateSubjectCount();
-                    
-                    // Check if we need to show empty state
-                    const scheduleList = document.getElementById('scheduleList');
-                    const remainingSubjects = scheduleList.querySelectorAll('.subject-item');
-                    if (remainingSubjects.length === 0) {
-                        const emptyState = document.createElement('div');
-                        emptyState.className = 'text-center py-8 text-gray-500 dark:text-gray-400';
-                        emptyState.innerHTML = `
-                            <svg class="w-12 h-12 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
-                            <p class="text-lg font-medium mb-2">No subjects added yet</p>
-                            <p class="text-sm mb-4">Start building your schedule by adding your first subject</p>
-                            <button onclick="document.getElementById('addSubjectBtn').click()" class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg transition-colors duration-200">
-                                Add Your First Subject
-                            </button>
-                        `;
-                        scheduleList.appendChild(emptyState);
-                    }
-                }, 300);
-            }
-        });
 
-        // Edit and delete instructor functionality
+            container.innerHTML = suggestions.map(suggestion => `
+                <div class="bg-gray-50 dark:bg-gray-600 rounded-lg p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="font-medium text-gray-900 dark:text-white">${suggestion.subject}</h4>
+                        <span class="text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded">${suggestion.status}</span>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">${suggestion.details}</p>
+                    <div class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
+                        <span>${suggestion.category}</span>
+                        <span>${suggestion.date}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize app
+        function initApp() {
+            renderSchedules();
+            renderInstructors();
+            renderAssignments();
+            renderSuggestions();
+        }
+
+        // Close modals when clicking outside
         document.addEventListener('click', (e) => {
-            if (e.target.closest('.edit-instructor-btn')) {
-                const instructorCard = e.target.closest('.instructor-card');
-                currentEditingInstructor = instructorCard;
-                
-                const nameElement = instructorCard.querySelector('h3');
-                const departmentElement = instructorCard.querySelector('p');
-                
-                // Populate edit form with current values
-                document.getElementById('editInstructorName').value = nameElement.textContent.trim();
-                document.getElementById('editInstructorDepartment').value = departmentElement.textContent.trim();
-                
-                // Show edit modal
-                editInstructorModal.classList.remove('hidden');
-                editInstructorModal.classList.add('flex');
-            }
-            
-            if (e.target.closest('.delete-instructor-btn')) {
-                const instructorCard = e.target.closest('.instructor-card');
-                
-                // Delete functionality with animation
-                instructorCard.style.animation = 'fadeOut 0.3s ease-out';
-                setTimeout(() => {
-                    instructorCard.remove();
-                    updateInstructorCount();
-                    
-                    // Check if we need to show empty state
-                    const instructorGrid = document.getElementById('instructorGrid');
-                    const remainingInstructors = instructorGrid.querySelectorAll('.instructor-card');
-                    if (remainingInstructors.length === 0) {
-                        const emptyState = document.createElement('div');
-                        emptyState.className = 'col-span-full text-center py-8 text-gray-500 dark:text-gray-400';
-                        emptyState.innerHTML = `
-                            <svg class="w-12 h-12 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-                            <p class="text-lg font-medium mb-2">No instructors added yet</p>
-                            <p class="text-sm mb-4">Add your instructors to easily contact them</p>
-                            <button onclick="document.getElementById('addInstructorBtn').click()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors duration-200">
-                                Add Your First Instructor
-                            </button>
-                        `;
-                        instructorGrid.appendChild(emptyState);
+            if (e.target.classList.contains('fixed')) {
+                const modals = ['scheduleModal', 'instructorModal', 'assignmentModal'];
+                modals.forEach(modalId => {
+                    if (e.target.id === modalId) {
+                        hideModal(modalId);
                     }
-                }, 300);
+                });
             }
         });
 
-        // Update instructor dropdown in contact modal
-        function updateInstructorDropdown() {
-            const instructorSelect = document.getElementById('instructorSelect');
-            const instructorCards = document.querySelectorAll('.instructor-card h3');
-            
-            // Clear existing options
-            instructorSelect.innerHTML = '';
-            
-            // Add current instructors to dropdown
-            instructorCards.forEach(nameElement => {
-                const option = document.createElement('option');
-                option.value = nameElement.textContent.trim();
-                option.textContent = nameElement.textContent.trim();
-                instructorSelect.appendChild(option);
-            });
-        }
-
-        // Update subject count
-        function updateSubjectCount() {
-            const count = document.querySelectorAll('.subject-item').length;
-            totalSubjects.textContent = count;
-        }
-
-        // Update instructor count
-        function updateInstructorCount() {
-            const count = document.querySelectorAll('.instructor-card').length;
-            document.getElementById('totalInstructors').textContent = count;
-        }
-
-        // Initialize schedule containers
-        document.addEventListener('DOMContentLoaded', () => {
-            clearScheduleContainer(document.getElementById('scheduleInputs'));
-            clearScheduleContainer(document.getElementById('editScheduleInputs'));
-        });
-
-        // Add fadeOut animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeOut {
-                from {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-                to {
-                    opacity: 0;
-                    transform: translateX(-20px);
-                }
-            }
-        `;
-        document.head.appendChild(style);
+        // Initialize the app
+        initApp();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981eb276c36d4034',t:'MTc1ODM0Mzc3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981fb737756bfecc',t:'MTc1ODM1NDQ1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
