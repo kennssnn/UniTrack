@@ -153,15 +153,122 @@
                     </div>
                     <h1 class="text-xl font-semibold text-gray-900">UniTrack</h1>
                 </div>
-                <button id="darkModeToggle" class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors text-sm font-medium">
-                    <span id="darkModeText">Dark</span>
-                </button>
+                <div class="flex items-center space-x-3">
+                    <button id="darkModeToggle" class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors text-sm font-medium">
+                        <span id="darkModeText">Dark</span>
+                    </button>
+                    <button id="logoutBtn" class="px-3 py-1 rounded-lg bg-red-100 hover:bg-red-200 text-red-700 transition-colors text-sm font-medium">
+                        Logout
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
+    <!-- Login Screen -->
+    <div id="loginScreen" class="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center px-4">
+        <div class="max-w-md w-full bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-green-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="text-white font-bold text-2xl">UT</span>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Welcome to UniTrack</h1>
+                <p class="text-gray-600 dark:text-gray-400 mt-2">Sign in to access your dashboard</p>
+            </div>
+            
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Username</label>
+                    <input type="text" id="loginUsername" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="Enter your username" required>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
+                    <input type="password" id="loginPassword" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="Enter your password" required>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center">
+                        <input type="checkbox" id="rememberMe" class="w-4 h-4 text-green-500 border-gray-300 dark:border-gray-600 rounded focus:ring-green-500">
+                        <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
+                    </label>
+                    <button type="button" class="text-sm text-green-500 hover:text-green-600">Forgot password?</button>
+                </div>
+                
+                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-medium transition-colors">
+                    Sign In
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center space-y-2">
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                    <strong>Student:</strong> username: <strong>student</strong>, password: <strong>demo123</strong>
+                </p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                    <strong>Teacher:</strong> username: <strong>teacher</strong>, password: <strong>demo123</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teacher Dashboard -->
+    <main id="teacherContent" class="max-w-7xl mx-auto px-4 py-6 space-y-8 hidden">
+        <!-- ID Selection Section -->
+        <section class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+            <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-6">Select Your Instructor ID</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                <button onclick="selectTeacherId('001')" id="id-001" class="p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-green-500 transition-colors text-center">
+                    <div class="font-mono font-bold text-lg">001</div>
+                </button>
+                <button onclick="selectTeacherId('002')" id="id-002" class="p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-green-500 transition-colors text-center">
+                    <div class="font-mono font-bold text-lg">002</div>
+                </button>
+                <button onclick="selectTeacherId('003')" id="id-003" class="p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-green-500 transition-colors text-center">
+                    <div class="font-mono font-bold text-lg">003</div>
+                </button>
+                <button onclick="selectTeacherId('004')" id="id-004" class="p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-green-500 transition-colors text-center">
+                    <div class="font-mono font-bold text-lg">004</div>
+                </button>
+                <button onclick="selectTeacherId('005')" id="id-005" class="p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-green-500 transition-colors text-center">
+                    <div class="font-mono font-bold text-lg">005</div>
+                </button>
+                <button onclick="selectTeacherId('006')" id="id-006" class="p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-green-500 transition-colors text-center">
+                    <div class="font-mono font-bold text-lg">006</div>
+                </button>
+                <button onclick="selectTeacherId('007')" id="id-007" class="p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-green-500 transition-colors text-center">
+                    <div class="font-mono font-bold text-lg">007</div>
+                </button>
+                <button onclick="selectTeacherId('008')" id="id-008" class="p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-green-500 transition-colors text-center">
+                    <div class="font-mono font-bold text-lg">008</div>
+                </button>
+                <button onclick="selectTeacherId('009')" id="id-009" class="p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-green-500 transition-colors text-center">
+                    <div class="font-mono font-bold text-lg">009</div>
+                </button>
+                <button onclick="selectTeacherId('010')" id="id-010" class="p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-green-500 transition-colors text-center">
+                    <div class="font-mono font-bold text-lg">010</div>
+                </button>
+            </div>
+            <div id="selectedIdInfo" class="mt-4 p-4 bg-green-50 dark:bg-green-900 rounded-lg hidden">
+                <p class="text-green-800 dark:text-green-200">Selected ID: <span id="selectedIdDisplay" class="font-mono font-bold"></span></p>
+                <p class="text-sm text-green-600 dark:text-green-300 mt-1">Students can now send messages to this ID</p>
+            </div>
+        </section>
+
+        <!-- Teacher Messages Section -->
+        <section class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+            <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-6">Student Messages</h2>
+            <div id="teacherMessageList" class="space-y-3">
+                <div class="text-center py-12 text-gray-500">
+                    <div class="text-6xl mb-4">📬</div>
+                    <p class="text-base">No messages from students yet</p>
+                    <p class="text-sm text-gray-400">Select your ID above to start receiving messages</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 py-6 space-y-8">
+    <main id="mainContent" class="max-w-7xl mx-auto px-4 py-6 space-y-8 hidden">
         <!-- Schedule Section -->
         <section id="schedule" class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
@@ -182,15 +289,9 @@
         <section id="instructors" class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
                 <h2 class="text-xl sm:text-2xl font-semibold text-gray-900">Instructor Contacts</h2>
-                <button id="addInstructorBtn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm transition-colors w-full sm:w-auto">
-                    Add Instructor
-                </button>
             </div>
             <div id="instructorList" class="space-y-3">
-                <div class="text-center py-12 text-gray-500">
-                    <p class="text-base">No instructors added yet</p>
-                    <p class="text-sm text-gray-400">Click "Add Instructor" to get started</p>
-                </div>
+                <!-- Instructors will be loaded here -->
             </div>
         </section>
 
@@ -206,6 +307,19 @@
                 <div class="text-center py-12 text-gray-500">
                     <p class="text-base">No assignments yet</p>
                     <p class="text-sm text-gray-400">Click "Add Assignment" to get started</p>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Messages Section -->
+        <section id="messages" class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+            <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-6">Received Messages</h2>
+            <div id="messageList" class="space-y-3">
+                <div class="text-center py-12 text-gray-500">
+                    <p class="text-base">No messages received yet</p>
+                    <p class="text-sm text-gray-400">Messages from instructors will appear here</p>
                 </div>
             </div>
         </section>
@@ -296,24 +410,23 @@
         </div>
     </div>
 
-    <!-- Instructor Modal -->
-    <div id="instructorModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <!-- Message Modal -->
+    <div id="messageModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Add Instructor</h3>
-            <form id="instructorForm" class="space-y-4">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Send Message</h3>
+            <div class="mb-4">
+                <p class="text-sm text-gray-600 dark:text-gray-400">To: <span id="messageRecipient" class="font-medium text-gray-900 dark:text-white"></span></p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">ID: <span id="messageRecipientId" class="font-medium text-gray-900 dark:text-white"></span></p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Subject: <span id="messageSubject" class="font-medium text-gray-900 dark:text-white"></span></p>
+            </div>
+            <form id="messageForm" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name</label>
-                    <input type="text" id="instructorName" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                    <textarea id="messageContent" rows="4" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" placeholder="Type your message here..." required></textarea>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
-                    <input type="text" id="instructorSubject" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
-                </div>
-
-
                 <div class="flex space-x-3 pt-4">
-                    <button type="button" id="cancelInstructor" class="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 py-2 rounded-lg">Cancel</button>
-                    <button type="submit" class="flex-1 bg-green-primary text-white py-2 rounded-lg">Save</button>
+                    <button type="button" id="cancelMessage" class="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 py-2 rounded-lg">Cancel</button>
+                    <button type="submit" class="flex-1 bg-green-primary text-white py-2 rounded-lg">Send Message</button>
                 </div>
             </form>
         </div>
@@ -359,12 +472,96 @@
         </div>
     </div>
 
+
+
     <script>
+        // Authentication
+        let isLoggedIn = localStorage.getItem('edutracker_logged_in') === 'true';
+        
         // Data storage
         let schedules = JSON.parse(localStorage.getItem('edutracker_schedules')) || [];
-        let instructors = JSON.parse(localStorage.getItem('edutracker_instructors')) || [];
         let assignments = JSON.parse(localStorage.getItem('edutracker_assignments')) || [];
         let suggestions = JSON.parse(localStorage.getItem('edutracker_suggestions')) || [];
+        let messages = JSON.parse(localStorage.getItem('edutracker_messages')) || [];
+
+        // Predefined instructors with ID numbers (editable)
+        let instructors = JSON.parse(localStorage.getItem('edutracker_instructors_data')) || [
+            { id: '001', name: '', subject: '' },
+            { id: '002', name: '', subject: '' },
+            { id: '003', name: '', subject: '' },
+            { id: '004', name: '', subject: '' },
+            { id: '005', name: '', subject: '' },
+            { id: '006', name: '', subject: '' },
+            { id: '007', name: '', subject: '' },
+            { id: '008', name: '', subject: '' },
+            { id: '009', name: '', subject: '' },
+            { id: '010', name: '', subject: '' }
+        ];
+
+        function updateInstructor(id, field, value) {
+            const instructor = instructors.find(i => i.id === id);
+            if (instructor) {
+                instructor[field] = value;
+                localStorage.setItem('edutracker_instructors_data', JSON.stringify(instructors));
+            }
+        }
+
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Simple authentication (in real app, this would be server-side)
+            if ((username === 'student' || username === 'teacher') && password === 'demo123') {
+                localStorage.setItem('edutracker_logged_in', 'true');
+                localStorage.setItem('edutracker_username', username);
+                localStorage.setItem('edutracker_usertype', username);
+                isLoggedIn = true;
+                if (username === 'teacher') {
+                    showTeacherApp();
+                } else {
+                    showMainApp();
+                    renderInstructors();
+                    renderSchedules();
+                    renderAssignments();
+                    renderMessages();
+                    renderSuggestions();
+                }
+            } else {
+                alert('Invalid credentials. Please use correct username and password.');
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('edutracker_logged_in');
+            localStorage.removeItem('edutracker_username');
+            isLoggedIn = false;
+            showLoginScreen();
+        });
+
+        function showLoginScreen() {
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('teacherContent').classList.add('hidden');
+            document.querySelector('header').classList.add('hidden');
+        }
+
+        function showMainApp() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('mainContent').classList.remove('hidden');
+            document.getElementById('teacherContent').classList.add('hidden');
+            document.querySelector('header').classList.remove('hidden');
+        }
+
+        function showTeacherApp() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('teacherContent').classList.remove('hidden');
+            document.querySelector('header').classList.remove('hidden');
+        }
 
         // Dark mode
         const darkModeToggle = document.getElementById('darkModeToggle');
@@ -465,54 +662,22 @@
         }
 
         // Instructor functions
-        document.getElementById('addInstructorBtn').addEventListener('click', () => showModal('instructorModal'));
-        document.getElementById('cancelInstructor').addEventListener('click', () => hideModal('instructorModal'));
-
-        document.getElementById('instructorForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const instructor = {
-                id: Date.now(),
-                name: document.getElementById('instructorName').value,
-                subject: document.getElementById('instructorSubject').value
-            };
-            
-            instructors.push(instructor);
-            localStorage.setItem('edutracker_instructors', JSON.stringify(instructors));
-            renderInstructors();
-            hideModal('instructorModal');
-            document.getElementById('instructorForm').reset();
-        });
-
         function renderInstructors() {
             const container = document.getElementById('instructorList');
             
-            if (instructors.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-12 text-gray-500 dark:text-gray-400">
-                        <div class="text-6xl mb-4">👨‍🏫</div>
-                        <p class="text-lg">No instructors added yet</p>
-                        <p class="text-sm">Click "Add Instructor" to get started</p>
-                    </div>
-                `;
-                return;
-            }
-
             container.innerHTML = instructors.map(instructor => `
                 <div class="bg-white dark:bg-gray-700 rounded-lg p-4 sm:p-6 border border-gray-200 dark:border-gray-600 shadow-sm">
                     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-2">
                         <div class="flex-1">
-                            <h3 class="font-semibold text-gray-900 dark:text-white text-lg sm:text-xl">${instructor.name}</h3>
-                            <p class="text-green-secondary dark:text-green-400 font-medium">${instructor.subject}</p>
+                            <div class="flex items-center gap-3 mb-2">
+                                <input type="text" value="${instructor.name}" placeholder="Enter instructor name" onchange="updateInstructor('${instructor.id}', 'name', this.value)" class="font-semibold text-gray-900 dark:text-white text-lg sm:text-xl bg-transparent border-b border-gray-300 dark:border-gray-600 focus:border-green-500 outline-none">
+                                <span class="bg-blue-100 dark:bg-gray-600 text-blue-700 dark:text-gray-300 px-2 py-1 rounded text-sm font-mono">ID: ${instructor.id}</span>
+                            </div>
+                            <input type="text" value="${instructor.subject}" placeholder="Enter subject" onchange="updateInstructor('${instructor.id}', 'subject', this.value)" class="text-green-secondary dark:text-green-400 font-medium bg-transparent border-b border-gray-300 dark:border-gray-600 focus:border-green-500 outline-none w-full">
                         </div>
-                        <button onclick="deleteInstructor(${instructor.id})" class="text-red-500 hover:text-red-700 px-2 py-1 text-sm self-start">
-                            Delete
-                        </button>
                     </div>
-                    <div class="space-y-2">
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-2 mt-4">
-                        <button onclick="sendMessage('${instructor.name}', '${instructor.subject}')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+                    <div class="mt-4">
+                        <button onclick="openMessageModal('${instructor.name}', '${instructor.subject}', '${instructor.id}')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm transition-colors">
                             Send Message
                         </button>
                     </div>
@@ -520,18 +685,132 @@
             `).join('');
         }
 
-        function deleteInstructor(id) {
-            instructors = instructors.filter(i => i.id !== id);
-            localStorage.setItem('edutracker_instructors', JSON.stringify(instructors));
-            renderInstructors();
+        let currentMessageRecipient = '';
+        let currentMessageSubject = '';
+        let currentMessageRecipientId = '';
+
+        function openMessageModal(instructorName, subject, instructorId) {
+            currentMessageRecipient = instructorName;
+            currentMessageSubject = subject;
+            currentMessageRecipientId = instructorId;
+            document.getElementById('messageRecipient').textContent = instructorName;
+            document.getElementById('messageSubject').textContent = subject;
+            document.getElementById('messageRecipientId').textContent = instructorId;
+            showModal('messageModal');
         }
 
-        function sendMessage(instructorName, subject) {
-            const message = prompt(`Send a message to ${instructorName} (${subject}):`);
-            if (message && message.trim()) {
-                alert(`Message sent to ${instructorName}!\n\nYour message: "${message.trim()}"\n\nThey will receive your message during their office hours.`);
+        document.getElementById('cancelMessage').addEventListener('click', () => {
+            hideModal('messageModal');
+            document.getElementById('messageForm').reset();
+        });
+
+        document.getElementById('messageForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const messageContent = document.getElementById('messageContent').value.trim();
+            if (messageContent) {
+                // Send message to teacher's message system
+                const teacherMessage = {
+                    id: Date.now(),
+                    teacherId: currentMessageRecipientId,
+                    content: messageContent,
+                    date: new Date().toLocaleDateString(),
+                    time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+                };
+                
+                teacherMessages.push(teacherMessage);
+                localStorage.setItem('edutracker_teacher_messages', JSON.stringify(teacherMessages));
+                
+                alert(`Message sent to ${currentMessageRecipient} (ID: ${currentMessageRecipientId})!\n\nYour message: "${messageContent}"\n\nThey will receive your message in their teacher dashboard.`);
+                
+                // Simulate instructor response after a short delay
+                setTimeout(() => {
+                    const responses = [
+                        "Thank you for your message. I'll get back to you during my office hours.",
+                        "I received your message. Please see me after class to discuss further.",
+                        "Thanks for reaching out. I'll review this and respond soon.",
+                        "I appreciate your question. Let's discuss this in more detail during office hours.",
+                        "Your message is noted. I'll provide feedback on this topic in our next class."
+                    ];
+                    
+                    const response = responses[Math.floor(Math.random() * responses.length)];
+                    
+                    const receivedMessage = {
+                        id: Date.now(),
+                        from: currentMessageRecipient,
+                        fromId: currentMessageRecipientId,
+                        subject: currentMessageSubject,
+                        originalMessage: messageContent,
+                        response: response,
+                        date: new Date().toLocaleDateString(),
+                        time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+                    };
+                    
+                    messages.push(receivedMessage);
+                    localStorage.setItem('edutracker_messages', JSON.stringify(messages));
+                    renderMessages();
+                    
+                    alert(`New message received from ${currentMessageRecipient} (ID: ${currentMessageRecipientId})!`);
+                }, 2000);
+                
+                hideModal('messageModal');
+                document.getElementById('messageForm').reset();
             }
+        });
+
+        // Message functions
+        function renderMessages() {
+            const container = document.getElementById('messageList');
+            
+            if (messages.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+                        <div class="text-6xl mb-4">📬</div>
+                        <p class="text-lg">No messages received yet</p>
+                        <p class="text-sm">Messages from instructors will appear here</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const sortedMessages = messages.sort((a, b) => b.id - a.id);
+
+            container.innerHTML = sortedMessages.map(message => `
+                <div class="bg-blue-50 dark:bg-gray-700 rounded-lg p-4 border-l-4 border-blue-500">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-semibold text-gray-900 dark:text-white text-lg">From: ${message.from}</h3>
+                                <span class="bg-blue-100 dark:bg-gray-600 text-blue-700 dark:text-gray-300 px-2 py-1 rounded text-xs font-mono">ID: ${message.fromId}</span>
+                            </div>
+                            <p class="text-blue-600 dark:text-blue-400 font-medium">${message.subject}</p>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">${message.date} at ${message.time}</p>
+                        </div>
+                        <button onclick="deleteMessage(${message.id})" class="text-red-500 hover:text-red-700 px-2 py-1 text-sm self-start">
+                            Delete
+                        </button>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="bg-gray-100 dark:bg-gray-600 rounded-lg p-3">
+                            <p class="text-sm text-gray-600 dark:text-gray-300 mb-1"><strong>Your message:</strong></p>
+                            <p class="text-gray-800 dark:text-gray-200">${message.originalMessage}</p>
+                        </div>
+                        <div class="bg-green-50 dark:bg-green-900 rounded-lg p-3">
+                            <p class="text-sm text-green-600 dark:text-green-300 mb-1"><strong>Instructor's response:</strong></p>
+                            <p class="text-green-800 dark:text-green-200">${message.response}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
         }
+
+        function deleteMessage(id) {
+            messages = messages.filter(m => m.id !== id);
+            localStorage.setItem('edutracker_messages', JSON.stringify(messages));
+            renderMessages();
+        }
+
+
 
         // Assignment functions
         document.getElementById('addAssignmentBtn').addEventListener('click', () => showModal('assignmentModal'));
@@ -667,7 +946,7 @@
             }
 
             container.innerHTML = suggestions.map(suggestion => `
-                <div class="bg-gray-50 dark:bg-gray-600 rounded-lg p-4">
+                <div class="bg-white dark:bg-gray-600 rounded-lg p-4 border border-gray-200 dark:border-gray-500">
                     <div class="flex justify-between items-start mb-2">
                         <h4 class="font-medium text-gray-900 dark:text-white">${suggestion.subject}</h4>
                         <span class="text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded">${suggestion.status}</span>
@@ -681,21 +960,112 @@
             `).join('');
         }
 
+        // Teacher functions
+        let selectedTeacherId = localStorage.getItem('edutracker_selected_teacher_id') || '';
+        let teacherMessages = JSON.parse(localStorage.getItem('edutracker_teacher_messages')) || [];
+
+        function selectTeacherId(id) {
+            // Clear previous selection
+            document.querySelectorAll('[id^="id-"]').forEach(btn => {
+                btn.classList.remove('border-green-500', 'bg-green-50', 'dark:bg-green-900');
+                btn.classList.add('border-gray-300', 'dark:border-gray-600');
+            });
+            
+            // Highlight selected ID
+            const selectedBtn = document.getElementById(`id-${id}`);
+            selectedBtn.classList.remove('border-gray-300', 'dark:border-gray-600');
+            selectedBtn.classList.add('border-green-500', 'bg-green-50', 'dark:bg-green-900');
+            
+            selectedTeacherId = id;
+            localStorage.setItem('edutracker_selected_teacher_id', id);
+            
+            // Show selected ID info
+            document.getElementById('selectedIdDisplay').textContent = id;
+            document.getElementById('selectedIdInfo').classList.remove('hidden');
+            
+            renderTeacherMessages();
+        }
+
+        function renderTeacherMessages() {
+            const container = document.getElementById('teacherMessageList');
+            
+            if (!selectedTeacherId) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+                        <div class="text-6xl mb-4">📬</div>
+                        <p class="text-base">No messages from students yet</p>
+                        <p class="text-sm text-gray-400">Select your ID above to start receiving messages</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const messagesForTeacher = teacherMessages.filter(msg => msg.teacherId === selectedTeacherId);
+            
+            if (messagesForTeacher.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+                        <div class="text-6xl mb-4">📬</div>
+                        <p class="text-base">No messages for ID ${selectedTeacherId} yet</p>
+                        <p class="text-sm text-gray-400">Students can send messages to your selected ID</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const sortedMessages = messagesForTeacher.sort((a, b) => b.id - a.id);
+
+            container.innerHTML = sortedMessages.map(message => `
+                <div class="bg-blue-50 dark:bg-gray-700 rounded-lg p-4 border-l-4 border-blue-500">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 dark:text-white text-lg">From Student</h3>
+                            <p class="text-blue-600 dark:text-blue-400 font-medium">To ID: ${message.teacherId}</p>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">${message.date} at ${message.time}</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-600 rounded-lg p-3">
+                        <p class="text-gray-800 dark:text-gray-200">${message.content}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
         // Initialize app
         function initApp() {
-            renderSchedules();
-            renderInstructors();
-            renderAssignments();
-            renderSuggestions();
+            const userType = localStorage.getItem('edutracker_usertype');
+            
+            // Check if user is logged in
+            if (isLoggedIn) {
+                if (userType === 'teacher') {
+                    showTeacherApp();
+                    if (selectedTeacherId) {
+                        selectTeacherId(selectedTeacherId);
+                    }
+                    renderTeacherMessages();
+                } else {
+                    showMainApp();
+                    renderSchedules();
+                    renderInstructors();
+                    renderAssignments();
+                    renderMessages();
+                    renderSuggestions();
+                }
+            } else {
+                showLoginScreen();
+            }
         }
 
         // Close modals when clicking outside
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('fixed')) {
-                const modals = ['scheduleModal', 'instructorModal', 'assignmentModal'];
+                const modals = ['scheduleModal', 'assignmentModal', 'messageModal'];
                 modals.forEach(modalId => {
                     if (e.target.id === modalId) {
                         hideModal(modalId);
+                        if (modalId === 'messageModal') {
+                            document.getElementById('messageForm').reset();
+                        }
                     }
                 });
             }
@@ -704,5 +1074,5 @@
         // Initialize the app
         initApp();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981fe76e3191fecd',t:'MTc1ODM1NjQzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'982010e1f467fed9',t:'MTc1ODM1ODEyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
