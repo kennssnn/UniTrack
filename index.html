@@ -24,14 +24,48 @@
             background-color: #111827 !important;
             color: #f9fafb !important;
         }
+        .dark-mode * {
+            border-color: #374151 !important;
+        }
         .dark-mode .bg-white {
             background-color: #1f2937 !important;
+            color: #f9fafb !important;
+        }
+        body:not(.dark-mode) .bg-white {
+            background-color: #ffffff !important;
+            color: #111827 !important;
+        }
+        body:not(.dark-mode) .text-gray-900 {
+            color: #111827 !important;
+        }
+        body:not(.dark-mode) .text-gray-700 {
+            color: #374151 !important;
+        }
+        body:not(.dark-mode) .text-gray-600 {
+            color: #4b5563 !important;
+        }
+        body:not(.dark-mode) .text-gray-500 {
+            color: #6b7280 !important;
+        }
+        body:not(.dark-mode) .text-gray-400 {
+            color: #9ca3af !important;
+        }
+        body:not(.dark-mode) .text-gray-300 {
+            color: #d1d5db !important;
+        }
+        body:not(.dark-mode) .bg-gray-300 {
+            background-color: #d1d5db !important;
+            color: #374151 !important;
         }
         .dark-mode .bg-gray-50 {
             background-color: #111827 !important;
         }
         .dark-mode .bg-gray-100 {
             background-color: #374151 !important;
+            color: #f9fafb !important;
+        }
+        .dark-mode .bg-gray-200 {
+            background-color: #4b5563 !important;
         }
         .dark-mode .text-gray-900 {
             color: #f9fafb !important;
@@ -47,6 +81,9 @@
         }
         .dark-mode .text-gray-400 {
             color: #9ca3af !important;
+        }
+        .dark-mode .text-gray-300 {
+            color: #d1d5db !important;
         }
         .dark-mode .border-gray-200 {
             border-color: #374151 !important;
@@ -69,6 +106,10 @@
             border-color: #10b981 !important;
             box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
         }
+        body:not(.dark-mode) .bg-green-light {
+            background-color: #d1fae5 !important;
+            color: #111827 !important;
+        }
         .dark-mode .bg-green-light {
             background-color: #064e3b !important;
         }
@@ -88,6 +129,15 @@
             color: #a7f3d0 !important;
         }
         .dark-mode .hover\:bg-gray-200:hover {
+            background-color: #4b5563 !important;
+        }
+        .dark-mode .bg-gray-800 {
+            background-color: #1f2937 !important;
+        }
+        .dark-mode .bg-gray-700 {
+            background-color: #374151 !important;
+        }
+        .dark-mode .bg-gray-600 {
             background-color: #4b5563 !important;
         }
     </style>
@@ -259,18 +309,8 @@
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
                     <input type="text" id="instructorSubject" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
-                    <input type="email" id="instructorEmail" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone</label>
-                    <input type="tel" id="instructorPhone" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Office Hours</label>
-                    <input type="text" id="instructorOfficeHours" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" placeholder="e.g., Mon-Fri 2:00-4:00 PM">
-                </div>
+
+
                 <div class="flex space-x-3 pt-4">
                     <button type="button" id="cancelInstructor" class="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 py-2 rounded-lg">Cancel</button>
                     <button type="submit" class="flex-1 bg-green-primary text-white py-2 rounded-lg">Save</button>
@@ -310,10 +350,7 @@
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Due Time</label>
                     <input type="time" id="assignmentTime" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Description</label>
-                    <textarea id="assignmentDescription" rows="3" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"></textarea>
-                </div>
+
                 <div class="flex space-x-3 pt-4">
                     <button type="button" id="cancelAssignment" class="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 py-2 rounded-lg">Cancel</button>
                     <button type="submit" class="flex-1 bg-green-primary text-white py-2 rounded-lg">Save</button>
@@ -437,10 +474,7 @@
             const instructor = {
                 id: Date.now(),
                 name: document.getElementById('instructorName').value,
-                subject: document.getElementById('instructorSubject').value,
-                email: document.getElementById('instructorEmail').value,
-                phone: document.getElementById('instructorPhone').value,
-                officeHours: document.getElementById('instructorOfficeHours').value
+                subject: document.getElementById('instructorSubject').value
             };
             
             instructors.push(instructor);
@@ -476,36 +510,11 @@
                         </button>
                     </div>
                     <div class="space-y-2">
-                        ${instructor.email ? `
-                            <div class="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
-                                <span class="text-gray-500 text-sm font-medium">Email:</span>
-                                <a href="mailto:${instructor.email}" class="text-blue-600 hover:underline break-all">${instructor.email}</a>
-                            </div>
-                        ` : ''}
-                        ${instructor.phone ? `
-                            <div class="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
-                                <span class="text-gray-500 text-sm font-medium">Phone:</span>
-                                <a href="tel:${instructor.phone}" class="text-blue-600 hover:underline">${instructor.phone}</a>
-                            </div>
-                        ` : ''}
-                        ${instructor.officeHours ? `
-                            <div class="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
-                                <span class="text-gray-500 text-sm font-medium">Office Hours:</span>
-                                <span class="text-gray-600 dark:text-gray-300">${instructor.officeHours}</span>
-                            </div>
-                        ` : ''}
                     </div>
                     <div class="flex flex-col sm:flex-row gap-2 mt-4">
-                        ${instructor.email ? `
-                            <button onclick="window.open('mailto:${instructor.email}', '_blank')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm transition-colors">
-                                Send Email
-                            </button>
-                        ` : ''}
-                        ${instructor.phone ? `
-                            <button onclick="window.open('tel:${instructor.phone}', '_blank')" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm transition-colors">
-                                Call
-                            </button>
-                        ` : ''}
+                        <button onclick="sendMessage('${instructor.name}', '${instructor.subject}')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+                            Send Message
+                        </button>
                     </div>
                 </div>
             `).join('');
@@ -515,6 +524,13 @@
             instructors = instructors.filter(i => i.id !== id);
             localStorage.setItem('edutracker_instructors', JSON.stringify(instructors));
             renderInstructors();
+        }
+
+        function sendMessage(instructorName, subject) {
+            const message = prompt(`Send a message to ${instructorName} (${subject}):`);
+            if (message && message.trim()) {
+                alert(`Message sent to ${instructorName}!\n\nYour message: "${message.trim()}"\n\nThey will receive your message during their office hours.`);
+            }
         }
 
         // Assignment functions
@@ -531,7 +547,6 @@
                 type: document.getElementById('assignmentType').value,
                 date: document.getElementById('assignmentDate').value,
                 time: document.getElementById('assignmentTime').value,
-                description: document.getElementById('assignmentDescription').value,
                 completed: false
             };
             
@@ -589,7 +604,6 @@
                                         Due: ${new Date(assignment.date).toLocaleDateString()}
                                         ${assignment.time ? ` at ${assignment.time}` : ''}
                                     </p>
-                                    ${assignment.description ? `<p class="text-gray-500 dark:text-gray-400 text-sm mt-2 break-words">${assignment.description}</p>` : ''}
                                     ${isOverdue ? '<p class="text-red-500 text-sm font-medium mt-1">Overdue</p>' : ''}
                                     ${isDueSoon ? '<p class="text-yellow-600 text-sm font-medium mt-1">Due soon</p>' : ''}
                                 </div>
@@ -690,5 +704,5 @@
         // Initialize the app
         initApp();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981fb737756bfecc',t:'MTc1ODM1NDQ1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981fe76e3191fecd',t:'MTc1ODM1NjQzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
